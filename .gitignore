@@ -11,9 +11,9 @@ venv/
 # Secrets / local config
 .env
 
-# Local data and run artifacts (directories are kept via .gitkeep)
-data/*
-!data/.gitkeep
+# Local databases and run artifacts (runs/ is kept via .gitkeep)
+data/*.db
+data/*.db-journal
 runs/*
 !runs/.gitkeep
 

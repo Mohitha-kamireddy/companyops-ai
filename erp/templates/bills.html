@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Bills - MiniERP{% endblock %}
+{% block content %}
+<h1>Bills</h1>
+<table id="bills-table">
+  <thead>
+    <tr><th>ID</th><th>Vendor</th><th>Invoice #</th><th class="num">Amount</th><th>Invoice date</th><th>Description</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+  {% for bill in bills %}
+    <tr class="bill-row" data-bill-id="{{ bill.id }}">
+      <td>{{ bill.id }}</td>
+      <td class="vendor">{{ bill.vendor }}</td>
+      <td class="invoice-number">{{ bill.invoice_number }}</td>
+      <td class="num amount">{{ bill.amount_cents | money }}</td>
+      <td class="invoice-date">{{ bill.invoice_date }}</td>
+      <td class="description">{{ bill.description }}</td>
+      <td class="status">{{ bill.status }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="7">No bills yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<a class="button" id="new-bill-link" href="{{ url_for('new_bill') }}">Enter a new bill</a>
+{% endblock %}

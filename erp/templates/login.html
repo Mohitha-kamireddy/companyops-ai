@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Log in - MiniERP{% endblock %}
+{% block content %}
+<h1>Log in</h1>
+{% if expired %}
+  <div class="flash warning" id="session-expired" role="alert">Your session has expired. Please log in again.</div>
+{% endif %}
+{% if error %}
+  <div class="flash error" id="login-error" role="alert">{{ error }}</div>
+{% endif %}
+<form method="post" action="{{ url_for('login') }}" id="login-form">
+  <label for="username">Username</label>
+  <input id="username" name="username" type="text" required autofocus>
+  <label for="password">Password</label>
+  <input id="password" name="password" type="password" required>
+  <button type="submit" id="login-button">Log in</button>
+</form>
+{% endblock %}

@@ -1,7 +1,9 @@
-# Phase 1 - skeleton only. Later phases will add: playwright, redis, arq,
-# an LLM SDK, and a database driver, when they are actually needed.
+# Playwright, Redis, ARQ and an LLM SDK will be added in the phases that need them.
 fastapi>=0.115
 uvicorn[standard]>=0.30
+
+# MiniERP (mock ERP under erp/); uses stdlib sqlite3
+flask>=3.0
 
 # Testing (httpx is required by FastAPI's TestClient)
 pytest>=8.0

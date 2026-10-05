@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}New bill - MiniERP{% endblock %}
+{% block content %}
+<h1>New bill</h1>
+<form method="post" action="{{ url_for('new_bill') }}" id="bill-form">
+  <label for="vendor">Vendor</label>
+  <input id="vendor" name="vendor" type="text" list="vendor-list" value="{{ form.get('vendor', '') }}" required>
+  <datalist id="vendor-list">{% for name in vendors %}<option value="{{ name }}">{% endfor %}</datalist>
+  {% if errors.vendor %}<div class="field-error" id="error-vendor">{{ errors.vendor }}</div>{% endif %}
+
+  <label for="invoice_number">Invoice number</label>
+  <input id="invoice_number" name="invoice_number" type="text" value="{{ form.get('invoice_number', '') }}" required>
+  {% if errors.invoice_number %}<div class="field-error" id="error-invoice_number">{{ errors.invoice_number }}</div>{% endif %}
+
+  <label for="amount">Amount (USD)</label>
+  <input id="amount" name="amount" type="number" step="0.01" min="0.01" value="{{ form.get('amount', '') }}" required>
+  {% if errors.amount %}<div class="field-error" id="error-amount">{{ errors.amount }}</div>{% endif %}
+
+  <label for="invoice_date">Invoice date</label>
+  <input id="invoice_date" name="invoice_date" type="date" value="{{ form.get('invoice_date', '') }}" required>
+  {% if errors.invoice_date %}<div class="field-error" id="error-invoice_date">{{ errors.invoice_date }}</div>{% endif %}
+
+  <label for="description">Description</label>
+  <textarea id="description" name="description" rows="3">{{ form.get('description', '') }}</textarea>
+  {% if errors.description %}<div class="field-error" id="error-description">{{ errors.description }}</div>{% endif %}
+
+  <button type="submit" id="submit-bill">Create bill</button>
+</form>
+{% endblock %}

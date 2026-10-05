@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - MiniERP{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="cards">
+  <div class="card"><div>Total bills</div><div class="value" id="stat-bill-count">{{ stats.bill_count }}</div></div>
+  <div class="card"><div>Vendors</div><div class="value" id="stat-vendor-count">{{ stats.vendor_count }}</div></div>
+  <div class="card"><div>Pending bills</div><div class="value" id="stat-pending-count">{{ stats.pending_count }}</div></div>
+  <div class="card"><div>Pending amount</div><div class="value" id="stat-pending-amount">{{ stats.pending_cents | money }}</div></div>
+</div>
+<h2>Recent bills</h2>
+<table id="recent-bills">
+  <thead><tr><th>ID</th><th>Vendor</th><th>Invoice #</th><th class="num">Amount</th><th>Status</th></tr></thead>
+  <tbody>
+  {% for bill in recent %}
+    <tr><td>{{ bill.id }}</td><td>{{ bill.vendor }}</td><td>{{ bill.invoice_number }}</td>
+        <td class="num">{{ bill.amount_cents | money }}</td><td>{{ bill.status }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<a class="button" id="new-bill-link" href="{{ url_for('new_bill') }}">Enter a new bill</a>
+{% endblock %}

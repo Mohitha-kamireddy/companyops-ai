@@ -1,0 +1,7 @@
+INVOICE
+
+Vendor: Acme Industrial Supplies
+Invoice Number: INV-2026-0417
+Amount: 4825.50
+Invoice Date: 2026-09-18
+Description: Q3 bulk order - hydraulic fittings and safety equipment
