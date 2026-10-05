@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets / local config
+.env
+
+# Local data and run artifacts (directories are kept via .gitkeep)
+data/*
+!data/.gitkeep
+runs/*
+!runs/.gitkeep
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store

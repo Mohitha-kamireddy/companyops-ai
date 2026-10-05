@@ -1,0 +1,8 @@
+# Phase 1 - skeleton only. Later phases will add: playwright, redis, arq,
+# an LLM SDK, and a database driver, when they are actually needed.
+fastapi>=0.115
+uvicorn[standard]>=0.30
+
+# Testing (httpx is required by FastAPI's TestClient)
+pytest>=8.0
+httpx>=0.27
