@@ -1,4 +1,8 @@
+import socket
+import threading
+
 import pytest
+from werkzeug.serving import make_server
 
 from erp import create_app
 
@@ -31,3 +35,29 @@ def client(make_app):
 def logged_in_client(client):
     client.post("/login", data=ADMIN)
     return client
+
+
+@pytest.fixture
+def erp_app(make_app):
+    """A fresh, seeded MiniERP app (its own temp database)."""
+    return make_app()
+
+
+@pytest.fixture
+def erp_url(erp_app):
+    """URL of a real MiniERP server running on a random local port for the test's duration."""
+    server = make_server("127.0.0.1", 0, erp_app, threaded=True)
+    thread = threading.Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    yield f"http://127.0.0.1:{server.server_port}"
+    server.shutdown()
+    thread.join(timeout=5)
+
+
+@pytest.fixture
+def dead_erp_url():
+    """A URL where nothing is listening, to simulate MiniERP being down."""
+    with socket.socket() as sock:
+        sock.bind(("127.0.0.1", 0))
+        port = sock.getsockname()[1]
+    return f"http://127.0.0.1:{port}"
